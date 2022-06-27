@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, IconButton, InputBase, Paper } from '@material-ui/core';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import ClearIcon from '@material-ui/icons/Clear';
+import storeAPI from '../../utils/storeAPI';
 
 const useStyle = makeStyles((theme) => ({
     card: {
@@ -23,19 +24,38 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-function InputCard({setOpen}) {
+function InputCard({setOpen, listId}) {
 
     const classes = useStyle();
+    const {addCard} = useContext(storeAPI);
+    const [cardTitle, setCardTitle] = useState('');
+
+    const handleOnChange = (e) => { 
+        setCardTitle(e.target.value)
+    }
+
+    const handleBtnConfirm = () => {
+        addCard(cardTitle, listId);
+        setCardTitle('')
+        setOpen(false)
+    }
+
+    const handleOnBlur = () => {
+        setOpen(false);
+        //setCardTitle('');
+    }
 
   return (
     <>
         <div>
             <Paper className={classes.card}>
                 <InputBase 
+                    onChange={handleOnChange}
                     multiline 
-                    onBlur={()=> setOpen(false)}
+                    onBlur={handleOnBlur}
                     fullWidth 
                     placeholder="Enter"
+                    value={cardTitle}
                     inputProps={{
                         classes: classes.input
                     }}
@@ -45,7 +65,7 @@ function InputCard({setOpen}) {
         <div className={classes.confirm}>
             <Button 
                 className={classes.btn} 
-                onClick={()=> setOpen(false)}
+                onClick={handleBtnConfirm}
             >
                 Add Card
             </Button>

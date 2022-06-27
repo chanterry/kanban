@@ -16,7 +16,7 @@ function Card({card}) {
     const classes = useStyle();
 
   return (
-    <Paper className={classes.card}>{card.content}</Paper>
+    <Paper className={classes.card}>{card.title}</Paper>
   )
 }
 
