@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
+import { Collapse, Paper, Typography } from '@material-ui/core'
+import { fade, makeStyles } from '@material-ui/core/styles';
 import InputCard from './InputCard';
-import { Collapse, Paper, Typography } from '@material-ui/core';
-import { makeStyles, fade } from '@material-ui/core/styles';
 
 const useStyle = makeStyles((theme) => ({
     root:{
-        marginTop: theme.spacing(2 )
+        marginTop: theme.spacing(2),
     },
     addCard:{
         padding: theme.spacing(1, 1, 1, 2),
         margin: theme.spacing(0, 1, 1, 1),
-        background: "#EBECF0",
+        backgroundColor: "#EBECF0",
         "&:hover": {
-            backgroundColor: fade('#000', 0.25)
+            backgroundColor: fade('#000', 0.25 )
         }
     }
 }))
 
-function InputContainer({listId}) {
+function InputContainer() {
 
     const classes = useStyle();
     const [open, setOpen] = useState(false);
@@ -25,23 +25,21 @@ function InputContainer({listId}) {
   return (
     <div className={classes.root}>
         <Collapse in={open}>
-            <InputCard setOpen={setOpen} listId={listId} />
+            <InputCard setOpen={setOpen}/>
         </Collapse>
-        
         <Collapse in={!open}>
-            <Paper 
+            <Paper
                 className={classes.addCard}
                 elevation={0}
-                onClick= {()=> setOpen(!open)}
+                onClick={() => setOpen(!open)}
             >
                 <Typography>
-                    + Add Card
+                    + Add Task 
                 </Typography>
             </Paper>
         </Collapse>
 
     </div>
-
   )
 }
 
