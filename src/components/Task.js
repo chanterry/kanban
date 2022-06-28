@@ -9,17 +9,17 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-function Card() {
+function Task({task} ) {
 
     const classes = useStyle();
 
   return (
     <div>
         <Paper className={classes.card}>
-            Making Trello 
+            {task.title}
         </Paper>
     </div>
   )
 }
 
-export default Card
+export default Task

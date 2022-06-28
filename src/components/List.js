@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from './Title';
-import Card from './Card';
+import Task from './Task';
 import InputContainer from './InputContainer';
 
 import { CssBaseline, Paper } from '@material-ui/core';
@@ -14,15 +14,17 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-function List({}) {
+function List({list}) {
 
   const classes = useStyle();
 
   return (
     <Paper className={classes.root}>
       <CssBaseline />
-      <Title />
-      <Card />
+      <Title title={list.title}/>
+      {list.tasks.map((task) => (
+        <Task key={task.id} task={task}/>
+      ))}
       <InputContainer />
     </Paper>
   )

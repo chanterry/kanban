@@ -23,7 +23,7 @@ const useStyle = makeStyles((theme) => ({
     } 
 }))
 
-function InputCard({setOpen}) {
+function InputTask({setOpen}) {
 
     const classes = useStyle();
 
@@ -54,4 +54,4 @@ function InputCard({setOpen}) {
   )
 }
 
-export default InputCard
+export default InputTask

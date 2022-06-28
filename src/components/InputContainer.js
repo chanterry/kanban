@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Collapse, Paper, Typography } from '@material-ui/core'
 import { fade, makeStyles } from '@material-ui/core/styles';
-import InputCard from './InputCard';
+import InputTask from './InputTask';
 
 const useStyle = makeStyles((theme) => ({
     root:{
@@ -25,7 +25,7 @@ function InputContainer() {
   return (
     <div className={classes.root}>
         <Collapse in={open}>
-            <InputCard setOpen={setOpen}/>
+            <InputTask setOpen={setOpen}/>
         </Collapse>
         <Collapse in={!open}>
             <Paper
