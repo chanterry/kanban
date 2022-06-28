@@ -17,7 +17,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-function InputContainer() {
+function InputContainer({listId}) {
 
     const classes = useStyle();
     const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ function InputContainer() {
   return (
     <div className={classes.root}>
         <Collapse in={open}>
-            <InputTask setOpen={setOpen}/>
+            <InputTask setOpen={setOpen} listId= {listId}/>
         </Collapse>
         <Collapse in={!open}>
             <Paper

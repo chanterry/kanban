@@ -23,9 +23,9 @@ function List({list}) {
       <CssBaseline />
       <Title title={list.title}/>
       {list.tasks.map((task) => (
-        <Task key={task.id} task={task}/>
+        <Task key={task.id} task={task} />
       ))}
-      <InputContainer />
+      <InputContainer listId={list.id} />
     </Paper>
   )
 }

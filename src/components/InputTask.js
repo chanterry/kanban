@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, IconButton, InputBase, Paper } from '@material-ui/core'
 import ClearIcon from "@material-ui/icons/Clear"
 import { fade, makeStyles } from '@material-ui/core/styles';
+import storeAPI from '../data/storeAPI';
 
 const useStyle = makeStyles((theme) => ({
     card:{
@@ -23,15 +24,29 @@ const useStyle = makeStyles((theme) => ({
     } 
 }))
 
-function InputTask({setOpen}) {
+function InputTask({setOpen, listId}) {
 
     const classes = useStyle();
+    const [taskTitle, setTaskTitle] = useState('');
+    const {addTask} = useContext(storeAPI);
+
+    const handleOnChange = (e) => {
+        setTaskTitle(e.target.value)
+    }
+
+    const handleConfirm = () => {
+        if (taskTitle !== ''){
+            addTask(taskTitle, listId); 
+        }
+        setTaskTitle('');
+    }
 
   return (
     <>
         <div>
             <Paper className={classes.card}>
                 <InputBase
+                    onChange={handleOnChange}
                     multiline
                     onBlur={()=> setOpen(false)}
                     fullWidth
@@ -39,14 +54,15 @@ function InputTask({setOpen}) {
                     inputProps={{
                         classes: classes.input,
                     }}  
+                    value={taskTitle}
                 />
             </Paper>
         </div>
         <div className={classes.confirm}>
-            <Button className={classes.btnConfirm} onClick={()=> setOpen(false )}>
+            <Button className={classes.btnConfirm} onClick={handleConfirm}>
                 Add Task
             </Button>
-            <IconButton onClick={()=> setOpen(false )}>
+            <IconButton onClick={()=> setOpen(false)}>
                 <ClearIcon />
             </IconButton>
         </div>
