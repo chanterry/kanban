@@ -5,6 +5,7 @@ import List from './components/List';
 import store from './data/store'
 import storeAPI from './data/storeAPI';
 import { v4 as uuid } from 'uuid';
+import InputContainer from './components/InputContainer';
 
 const useStyle = makeStyles((theme) => ({
   root:{
@@ -16,6 +17,7 @@ const useStyle = makeStyles((theme) => ({
 
 function App() {
 
+  const classes = useStyle(); 
   const [data, setData] = useState(store);
 
   const addTask = (title, listId) => {
@@ -40,11 +42,12 @@ function App() {
  
   return (
     <storeAPI.Provider value={{addTask}}>
-      <div>
+      <div className={classes.root}>
         {data.listIds.map((listId) => {
           const list = data.lists[listId];
           return <List key={listId} list={list} />
         })}
+        <InputContainer type='list'/>
       </div>
     </storeAPI.Provider>
 

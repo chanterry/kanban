@@ -7,10 +7,10 @@ import storeAPI from '../data/storeAPI';
 const useStyle = makeStyles((theme) => ({
     card:{
         margin: theme.spacing(0, 1, 1, 1),
-        paddingBottom: theme.spacing(4),
+        paddingBottom: theme.spacing(5),
     },
     input:{ 
-        margin: theme.spacing(1),
+        marginLeft: theme.spacing(1),
     },
     btnConfirm:{
         background: "#5AAC44",
@@ -24,21 +24,21 @@ const useStyle = makeStyles((theme) => ({
     } 
 }))
 
-function InputTask({setOpen, listId}) {
+function InputTask({setOpen, listId, type}) {
 
     const classes = useStyle();
-    const [taskTitle, setTaskTitle] = useState('');
+    const [title, setTitle] = useState('');
     const {addTask} = useContext(storeAPI);
 
     const handleOnChange = (e) => {
-        setTaskTitle(e.target.value)
+        setTitle(e.target.value)
     }
 
     const handleConfirm = () => {
-        if (taskTitle !== ''){
-            addTask(taskTitle, listId); 
+        if (title !== ''){
+            addTask(title, listId);
         }
-        setTaskTitle('');
+        setTitle('');
     }
 
   return (
@@ -46,21 +46,18 @@ function InputTask({setOpen, listId}) {
         <div>
             <Paper className={classes.card}>
                 <InputBase
+                    className={classes.input}
                     onChange={handleOnChange}
                     multiline
-                    onBlur={()=> setOpen(false)}
                     fullWidth
-                    placeholder='Enter a task'
-                    inputProps={{
-                        classes: classes.input,
-                    }}  
-                    value={taskTitle}
+                    value={title}
+                    placeholder={type == 'task' ? 'Enter a task' : 'Enter a list title'}
                 />
             </Paper>
         </div>
         <div className={classes.confirm}>
             <Button className={classes.btnConfirm} onClick={handleConfirm}>
-                Add Task
+                {type == 'task' ? 'Add Task' : 'Add List'}
             </Button>
             <IconButton onClick={()=> setOpen(false)}>
                 <ClearIcon />

@@ -5,10 +5,11 @@ import InputTask from './InputTask';
 
 const useStyle = makeStyles((theme) => ({
     root:{
-        marginTop: theme.spacing(2),
+        width: "300px",
+        marginTop: theme.spacing(1),
     },
-    addCard:{
-        padding: theme.spacing(1, 1, 1, 2),
+    addTask:{
+        padding: theme.spacing(1, 1, 1, 1),
         margin: theme.spacing(0, 1, 1, 1),
         backgroundColor: "#EBECF0",
         "&:hover": {
@@ -17,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-function InputContainer({listId}) {
+function InputContainer({listId, type}) {
 
     const classes = useStyle();
     const [open, setOpen] = useState(false);
@@ -25,16 +26,16 @@ function InputContainer({listId}) {
   return (
     <div className={classes.root}>
         <Collapse in={open}>
-            <InputTask setOpen={setOpen} listId= {listId}/>
+            <InputTask setOpen={setOpen} listId={listId} type={type}/>
         </Collapse>
         <Collapse in={!open}>
             <Paper
-                className={classes.addCard}
+                className={classes.addTask }
                 elevation={0}
                 onClick={() => setOpen(!open)}
             >
                 <Typography>
-                    + Add Task 
+                   {type == 'task' ?  '+ Add task' : 'Add another list'}
                 </Typography>
             </Paper>
         </Collapse>

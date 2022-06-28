@@ -10,7 +10,7 @@ const useStyle = makeStyles((theme) => ({
     root:{
         width: "300px",
         backgroundColor: "#EBECF0",
-        marginLeft : theme.spacing(1)
+        margin: theme.spacing(1, 0, 1, 1),
     }
 }))
 
@@ -25,7 +25,7 @@ function List({list}) {
       {list.tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}
-      <InputContainer listId={list.id} />
+      <InputContainer listId={list.id} type='task'/>
     </Paper>
   )
 }
