@@ -39,9 +39,26 @@ function App() {
     }
     setData(updatedState)
   };
+
+  const addList = (title) => {
+    const newListId = uuid();
+    const newList = {
+       id: newListId,
+       title,
+       tasks: []
+    }
+    const updatedState ={
+      listIds:[...data.listIds, newListId],
+      lists: {
+        ...data.lists,
+        [newListId]: newList
+      }
+    }
+    setData(updatedState)
+  }
  
   return (
-    <storeAPI.Provider value={{addTask}}>
+    <storeAPI.Provider value={{addTask, addList}}>
       <div className={classes.root}>
         {data.listIds.map((listId) => {
           const list = data.lists[listId];

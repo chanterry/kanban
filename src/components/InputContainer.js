@@ -35,7 +35,7 @@ function InputContainer({listId, type}) {
                 onClick={() => setOpen(!open)}
             >
                 <Typography>
-                   {type == 'task' ?  '+ Add task' : 'Add another list'}
+                   {type == 'task' ?  '+ Add task' : '+ Add another list'}
                 </Typography>
             </Paper>
         </Collapse>

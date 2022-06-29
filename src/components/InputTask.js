@@ -28,17 +28,22 @@ function InputTask({setOpen, listId, type}) {
 
     const classes = useStyle();
     const [title, setTitle] = useState('');
-    const {addTask} = useContext(storeAPI);
+    const {addTask, addList} = useContext(storeAPI);
 
     const handleOnChange = (e) => {
         setTitle(e.target.value)
     }
 
     const handleConfirm = () => {
-        if (title !== ''){
+        if (title !== '' && type === 'task'){
             addTask(title, listId);
+            setTitle(''); 
+            
+        } else if (title !== '' && type === 'list'){
+            addList(title);
+            setTitle(''); 
         }
-        setTitle('');
+        
     }
 
   return (
